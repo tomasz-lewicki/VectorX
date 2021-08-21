@@ -9,6 +9,7 @@ context = zmq.Context()
 socket = context.socket(zmq.PUSH)
 socket.bind(f"tcp://*:{PORT}")
 
+
 while True:
-    arr = np.zeros(SHAPE, dtype=np.uint8)
+    arr = np.ones(SHAPE, dtype=np.uint8)
     send_array(socket, arr)

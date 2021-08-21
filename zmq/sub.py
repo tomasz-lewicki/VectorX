@@ -11,7 +11,7 @@ socket.connect(f"tcp://localhost:{PORT}")
 
 cnt = 0
 
-for i in range(int(1e3)):
+for i in range(int(1e4)):
     cnt += 1
     print(cnt)
     arr = recv_array(socket)
