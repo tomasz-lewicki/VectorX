@@ -1,6 +1,6 @@
 
 Rules:
-- How much throughput 
+- The goal is to exchange `100 000` x `1080x1920` `uint8` arrays (i.e. 1080p grayscale frame) in the shortest time possible
 - Atomicity is nice to have, but not required
 - Subscriber must be able to perform meaningful operation on the image (here `np.sum()`)
 - Dirty/unsafe tricks are permitted (and welcome)
