@@ -22,9 +22,9 @@ time (python3 shm/pub.py python3 shm/sub.py)
 
 ## Results
 
-|method|throughput (Intel E5-2690 v3)|atomic?|
-|-|-|-|
-|shm|12075 FPS|no|
+| method | throughput (Xeon) | throughput (Apple M1) | throughput (Jetson Nano) | atomic? |
+| ------ | ----------------- | --------------------- | ------------------------ | ------- |
+| shm    | 12075 FPS         |                       |                          | no      |
 
 
 ## Test SHM
