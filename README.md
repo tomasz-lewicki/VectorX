@@ -1,9 +1,6 @@
 # VectorX
 
-_(Vector eXchange)_
-
-
-This is an IPC library wutg 
+_(Vector eXchange)_ - IPC library to exchange vectors.
 
 ## 
 
