@@ -1,31 +1,32 @@
+# VectorX
 
-Rules:
-- The goal is to exchange `100 000` x `1080x1920` `uint8` arrays (i.e. 1080p grayscale frame) in the shortest time possible
-- Atomicity is nice to have, but not required
-- Subscriber must be able to perform meaningful operation on the image (here `np.sum()`)
-- Dirty/unsafe tricks are permitted (and welcome)
+_(Vector eXchange)_
 
 
-ZMQ: 10000/6.124=1633 buf/s
-```shell
-time (python3 zmq/pub.py & python3 zmq/sub.py)
-5.11s user 5.48s system 172% cpu 6.124 total
-```
+This is an IPC library wutg 
+
+## 
+
+| method |     | atomic R/W? | topic identifier |
+| ------ | --- | ----------- | ---------------- |
+| shm    |     | no          |                  |
+| redis  |     | yes         | `/shm` file name |
+| ZMQ    |     | yes         |                  |
 
 
-SHM: 10000/1.018= 10k buf/s (!)
-```shell
-time (python3 shm/pub.py python3 shm/sub.py)
-( python3 shm/pub.py python3 shm/sub.py; )  2.11s user 1.28s system 333% cpu 1.018 total
-```
+## Benchmarks 
+The goal is to exchange `100 000` count of `1080x1920` `uint8` arrays (i.e. 1080p grayscale frame) in the shortest time possible.
+Atomicity is nice to have, but not required.
+Subscriber must be able to perform meaningful operation on the image (here `np.sum()`).
+Dirty or "unsafe" tricks are permitted (and welcome).
 
 
-## Results
 
-| method | throughput (Xeon) | throughput (Apple M1) | throughput (Jetson Nano) | atomic? |
-| ------ | ----------------- | --------------------- | ------------------------ | ------- |
-| shm    | 12075 FPS         |                       |                          | no      |
-
+| method | Intel Xeon | Apple M1 | Jetson Nano | atomic R/W? | topic identifier |
+| ------ | ---------- | -------- | ----------- | ----------- | ---------------- |
+| shm    | 12075 FPS  |          |             | no          | `/shm` file name |
+| redis  |            |          |             | yes         | port number      |
+| ZMQ    |            |          |             | yes         | port number      |
 
 ## Test SHM
 
@@ -34,9 +35,6 @@ python3 shm/sub.py
 python3 shm/pub.py # In a different window 
 ```
 
-## Test Redis
-
-## Test ROS
 
 
 
