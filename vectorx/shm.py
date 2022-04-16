@@ -1,5 +1,6 @@
 import numpy as np
-from multiprocessing import shared_memory
+from multiprocessing import shared_memory, resource_tracker
+
 
 class SharedArrayPub:
 
@@ -52,9 +53,10 @@ class SharedArraySub:
                 create=False
                 )
         except FileNotFoundError:
-            raise("Topic Name not Found")
+            raise(ValueError("Topic Name not Found"))
         
         return shm
     
     def __del__(self):
-        self._shm.close()
+        # https://bugs.python.org/issue38119
+        resource_tracker.unregister(self._shm._name, 'shared_memory')
